@@ -10,7 +10,10 @@ const LoginPage = () => {
   };
   return (
     <>
-      <div className="bg-purple-100/50  h-screen w-screen flex items-center justify-center sm:p-5 md:p-10">
+      <div className="bg-purple-100/50  h-[100vh] w-[100vw] flex items-center justify-center sm:p-5 md:p-10">
+        {/* originnal down */}
+      {/* <div className="bg-purple-100/50  h-screen w-screen flex items-center justify-center sm:p-5 md:p-10"> */}
+
         <div className=" p-5 sm:p-6 md:p-2 shadow-lg flex items-center  gap-0 justify-center h-[100%]  w-[100%]  max-w-5xl  rounded-lg ">" 
         {/* bg-slate-100" */}
           {/* images */}
