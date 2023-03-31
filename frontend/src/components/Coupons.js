@@ -2,9 +2,9 @@ import React from "react";
 
 const Coupons = () => {
   return (
-    <div className="flex flex-col items-center justify-start h-[100vw] w-[100vw] bg-white-100">
+    <div className="flex flex-col items-center justify-start h-[100%] w-[100%] bg-white-100">
       <p className="text-4xl mb-28 mt-5 "> <span><i class="fa-solid fa-angle-left"></i></span>  Your coupons</p>
-      <div className="bg-gradient-to-r bg-indigo-600  h-[400px] w-[225px]  flex flex-col rounded-2xl shadow-2xl  overflow-hidden">
+      <div className="bg-gradient-to-r bg-blue-800  h-[400px] w-[225px]  flex flex-col rounded-2xl shadow-2xl  overflow-hidden">
         <div className="flex flex-col items-center justify-center h-[60%] w-[100%]  text-orange-400">
           <p className="text-3xl font-bold">25% OFF</p>
           <p className="text-2xl mt-5">IPHONE 14</p>

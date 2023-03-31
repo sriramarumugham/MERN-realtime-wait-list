@@ -13,25 +13,38 @@ const Score = () => {
         {/* ranklist */}
         <div className="flex h-[65%] w-[90%] bg-white">
           <ul className="w-[100%] flex flex-col gap-2">
-            <li className=" bg-indigo-300 w-[100%] px-5 py-2 rounded-lg"> <span  bg-blue-100 > #{1 }</span> Sreeram</li>
-            <li className=" bg-indigo-300 w-[100%] px-5 py-2 rounded-lg"> <span> #{1 }</span> Sreeram</li>
-            <li className=" bg-indigo-300 w-[100%] px-5 py-2 rounded-lg"> <span> #{1 }</span> Sreeram</li>
-            <li className=" bg-indigo-300 w-[100%] px-5 py-2 rounded-lg"> <span> #{1 }</span> Sreeram</li>
-            <li className=" bg-indigo-500 w-[100%] px-5 py-2 rounded-lg"> <span> #{1 }</span> Sreeram</li>
-
-         
+            <li className=" bg-blue-100 w-[100%] px-5 py-2 rounded-lg">
+              {" "}
+              <span bg-blue-100> #{1}</span> Sreeram
+            </li>
+            <li className=" bg-blue-100 w-[100%] px-5 py-2 rounded-lg">
+              {" "}
+              <span> #{1}</span> Sreeram
+            </li>
+            <li className=" bg-blue-100 w-[100%] px-5 py-2 rounded-lg">
+              {" "}
+              <span> #{1}</span> Sreeram
+            </li>
+            <li className=" bg-blue-100 w-[100%] px-5 py-2 rounded-lg">
+              {" "}
+              <span> #{1}</span> Sreeram
+            </li>
+            <li className=" bg-blue-300 w-[100%] px-5 py-2 rounded-lg">
+              {" "}
+              <span> #{1}</span> Sreeram
+            </li>
           </ul>
         </div>
 
         {/* referral link */}
 
         <div className="flex flex-col w-[90%]  h-[30%]   max-w-lg ">
-          <div className="flex  flex-col  items-center justify-center border-3 rounded-lg shadow-lg mb-4 bg-indigo-600 p-5">
+          <div className="flex  flex-col  items-center justify-center border-3 rounded-lg shadow-lg mb-4 bg-blue-600 p-5">
             <p className="text-lg font-bold text-orange-200">
+              Your code AKHKJHK
               <span>
-                <i class="fa-regular fa-clipboard mr-3"></i>
+                <i class="fa-regular fa-clipboard mx-3"></i>
               </span>{" "}
-              AKHKJHK
             </p>
           </div>
           {/* infstruction */}

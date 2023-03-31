@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <div className="h-[100vh] w-[100vw] bg-white overflow-x-hidden relative  flex flex-col">
       {/* original downs */}
-    {/* <div className="h-[100%] w-[100%] bg-white overflow-x-hidden relative  flex flex-col"> */}
+      {/* <div className="h-[100%] w-[100%] bg-white overflow-x-hidden relative  flex flex-col"> */}
 
       <div className="bg-white  rounded-2xl relative w-[100%] h-[70%] top-[-5%]  sm:h-[75%]  sm:w-[100%] sm:left-[0%] sm:top-[0%]  md:top-[2%]   md:left-[40%] md:h-[70%]  md:w-[60%]">
         <img
@@ -25,10 +25,9 @@ const HomePage = () => {
         </div>
       </div>
       <div className=" mt-[-10%]  w-[100%] flex-1 flex justify-center items-center">
-        <div className="mt-[20%]  w-[90%] md:mt-[15%] sm:mx-[10%]">
-          <p className=" text-lg md:text-2xl">
-            Register and share your referall code to claim a early buyer
-            discound <sapan className="underline text-blue-500">register</sapan>{" "}
+        <div className="mt-[10%]   md:mt-[7%] sm:mx-[10%] ">
+          <p className=" text-2xl sm:text-2xl md:text-4xl bg-clip-text   text-transparent bg-gradient-to-r  from-indigo-800 via-purple-700 to-pink-600  ">
+            Register <i class="fa-solid fa-chevron-right"></i>
           </p>
         </div>
       </div>
