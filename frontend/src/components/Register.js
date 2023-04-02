@@ -11,7 +11,6 @@ const Register = ({ handleLogin }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loding, setLoding] = useState(false);
-  const [error, setError] = useState();
 
   const navigate = useNavigate();
 

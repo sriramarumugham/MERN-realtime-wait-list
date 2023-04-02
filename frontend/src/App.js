@@ -17,6 +17,8 @@ function App() {
     <div className="flex    justify-center items-center h-[100vh] overflow-hidden  w-[100vw] box-border">
       <Routes>
         <Route path={'/' } element={<LoginPage/>}/>
+        <Route path={'/home' } element={<HomePage/>}/>
+
       </Routes>
       {/* <HomePage/> */}
       {/* <CouponsPages/> */}

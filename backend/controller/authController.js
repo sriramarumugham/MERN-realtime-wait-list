@@ -35,7 +35,11 @@ const login = async (req, res) => {
         .status(404)
         .json({ message: "User dosent exist please register" });
     } else {
-      
+      if(password!=existingUser.password){
+        return res.status(504).json({message:"password or email incorrect"});
+      }
+      return res.status(200).json({user:existingUser});
+
     }
   } catch (err) {
     return res.status(400).json({ message: err });
