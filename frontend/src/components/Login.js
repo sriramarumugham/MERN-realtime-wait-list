@@ -20,10 +20,7 @@ const Login = ({ handleLogin }) => {
           <div className="w-[45%] h-[0.4px]  bg-slate-500/50 "></div>
         </div>
 
-        <button className="bg-white border-2 rounded-lg w-[100%]  m-auto h-[40px] p-2 flex items-center gap-2 justify-center ">
-          <img src={mainLogo} className="object-contain h-[90%] w-[10%]" />{" "}
-          <p className="text-slate-800"> Sign in with Google</p>
-        </button>
+      
 
         <p className="text-gray-500 text-sm m-auto mt-5">
           Not registered?{" "}
