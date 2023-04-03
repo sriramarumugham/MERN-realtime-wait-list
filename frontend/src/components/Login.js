@@ -38,8 +38,8 @@ const Login = ({ handleLogin }) => {
           console.log(response.data);
           if (response.data.token) {
             let token = response.data.token;
+            setToken(token);
             token = JSON.stringify(token);
-
             localStorage.setItem("signedJWT", token);
             toast("Logged in");
             navigate("/home");

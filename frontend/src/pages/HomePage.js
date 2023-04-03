@@ -5,7 +5,7 @@ import axios from "axios";
 import { UserState } from "../context/UserProvider";
 
 const HomePage = () => {
-  const { token, setUser, user } = UserState();
+  const { token, setUser } = UserState();
 
   const getInfo = async (token) => {
     let config = {
@@ -27,12 +27,10 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (token) {
+      const timer = setTimeout(() => {
         getInfo(token);
-      }
-    }, 100);
-    return () => clearTimeout(timer);
+      }, 100);
+      return () => clearTimeout(timer);
   }, []);
 
   // component

@@ -5,7 +5,7 @@ const userContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [token, setToken] = useState("");
-  const [user, setUser]=useState({});
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const UserProvider = ({ children }) => {
   }, []);
 
   return (
-    <userContext.Provider value={{ token, setToken  , user, setUser}}>
+    <userContext.Provider value={{ token, setToken, user, setUser }}>
       {children}
     </userContext.Provider>
   );
