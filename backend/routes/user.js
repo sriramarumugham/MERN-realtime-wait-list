@@ -1,9 +1,9 @@
 const router = require("express").Router();
 
+
 const {protected} =require('../middleware/protected');
-router.get("/get-info" ,protected ,  (req, res)=>{
-    return res.send('user info')
-});
+const {userInfo} =require('../controller/userController');
+router.get("/get-info" ,protected ,  userInfo);
 
 
 

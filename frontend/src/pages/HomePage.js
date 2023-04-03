@@ -5,22 +5,21 @@ import axios from "axios";
 import { UserState } from "../context/UserProvider";
 
 const HomePage = () => {
-
-
-  const { token } = UserState();
+  const { token, setUser, user } = UserState();
 
   const getInfo = async (token) => {
     let config = {
       headers: {
-        Authorization: 'Bearer '+token ,
+        Authorization: "Bearer " + token,
         withCredentials: true,
       },
     };
 
     axios
-      .get("http://localhost:8000/user/get-info",config )
+      .get("http://localhost:8000/user/get-info", config)
       .then((response) => {
-        console.log(response);
+        const { user } = response.data;
+        setUser(user);
       })
       .catch((err) => {
         console.log(err);
@@ -28,16 +27,13 @@ const HomePage = () => {
   };
 
   useEffect(() => {
- 
     const timer = setTimeout(() => {
-      if(token){
+      if (token) {
         getInfo(token);
       }
     }, 100);
     return () => clearTimeout(timer);
   }, []);
-
-
 
   // component
   return (

@@ -1,3 +1,14 @@
 const userInfo=(req, res)=>{
-    return res.status(200).message({"message":"user-info"});
+    try{
+        console.log(req.user)
+        let userId=req.user;
+        // console.log(userId);
+        return res.status(200).json({user:userId})
+    }
+    catch(err){
+        return res.status(400).json({error:err});
+
+    }
 }
+
+module.exports={userInfo};
