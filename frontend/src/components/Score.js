@@ -1,9 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const Score = () => {
+  const navigate=useNavigate();
   return (
     <div className="flex flex-col items-center  justify-start h-[100vh] w-[100vw] gap-5 bg-white ">
-      <p className="text-4xl mt-5 ">
+      <p className="text-4xl mt-5 cursor-pointer "  onClick={()=>{navigate(-1)}}>
         <span>
           <i class="fa-solid fa-angle-left mr-3"></i>
         </span>

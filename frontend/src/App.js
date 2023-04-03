@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CouponsPage from "./pages/CouponsPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path={"/home"} element={<HomePage />} />
         <Route path={"/leader-board"} element={<LeaderBoard />} />
         <Route path={"/early-register"} element={<JoinRoom />} />
+        <Route path={"/reedem-coupons"} element={<CouponsPage/>} />
       </Routes>
 
       <ToastContainer />

@@ -3,6 +3,7 @@ import iphone from "../utils/iphone.png";
 import earphone from "../utils/earphone.png";
 import axios from "axios";
 import { UserState } from "../context/UserProvider";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const { token, setUser } = UserState();
@@ -57,8 +58,11 @@ const HomePage = () => {
       </div>
       <div className=" mt-[-10%]  w-[100%] flex-1 flex justify-center items-center">
         <div className="mt-[10%]   md:mt-[7%] sm:mx-[10%] ">
-          <p className=" text-2xl sm:text-2xl md:text-4xl bg-clip-text   text-transparent bg-gradient-to-r  from-indigo-800 via-purple-700 to-pink-600  ">
-            Register <i class="fa-solid fa-chevron-right"></i>
+          <p className=" text-2xl cursor-pointer sm:text-2xl md:text-4xl bg-clip-text   text-transparent bg-gradient-to-r  from-indigo-800 via-purple-700 to-pink-600  ">
+          <Link to={'/reedem-coupons'} > Claim coupons</Link><i class="fa-solid fa-chevron-right"></i>
+          
+          {/* <Link to={'/leader-board'} > Leader bord</Link><i class="fa-solid fa-chevron-right"></i> */}
+            {/* <Link to={'/early-register'} > Register</Link><i class="fa-solid fa-chevron-right"></i> */}
           </p>
         </div>
       </div>

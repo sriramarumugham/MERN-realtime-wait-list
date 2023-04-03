@@ -87,6 +87,7 @@ const Login = ({ handleLogin }) => {
           placeholder="Password"
           className="login-input"
           value={password}
+          
           onChange={(e) => handleInput(e, setPassword)}
         ></input>
         <button className="login-btn mt-5">Login</button>
