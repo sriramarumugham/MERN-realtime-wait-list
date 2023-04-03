@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 
 import { toast } from "react-toastify";
 
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 
+import { UserState } from "../context/UserProvider";
 const Login = ({ handleLogin }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,6 +14,8 @@ const Login = ({ handleLogin }) => {
   const [loding, setLoding] = useState(false);
 
   const navigate = useNavigate();
+
+  const { token, setToken } = UserState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +27,8 @@ const Login = ({ handleLogin }) => {
     const user = { email, password };
     axios
       .post("http://localhost:8000/auth/login", {
-        user,
+        user: user,
+        withCredentials: true,
       })
       .then((response) => {
         if (response.status !== 200) {
@@ -32,14 +36,32 @@ const Login = ({ handleLogin }) => {
           toast(response.data.message);
         } else {
           console.log(response.data);
-          toast("logged in");
-          navigate("/home");
+          if (response.data.token) {
+            let token = response.data.token;
+            token = JSON.stringify(token);
+
+            localStorage.setItem("signedJWT", token);
+            toast("Logged in");
+            navigate("/home");
+          }
         }
       });
   };
   const handleInput = (e, changeState) => {
     changeState(e.target.value);
   };
+
+  useEffect(() => {
+    let userInfo = localStorage.getItem("signedJWT");
+    userInfo = JSON.parse(userInfo);
+    setToken(userInfo);
+
+    if (!token) {
+      navigate("/");
+    } else {
+      navigate("/home");
+    }
+  }, [token]);
 
   return (
     <div className=" h-[70%]  w-[80%] md:w-[70%] rounded-xl flex flex-col  gap-2">

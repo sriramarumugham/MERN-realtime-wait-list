@@ -1,5 +1,7 @@
 const User = require("../model/User");
 
+const signJswtToken = require("../config/jwt");
+
 const register = async (req, res) => {
   const { name, email, password } = req.body.user;
   if (!name || !email || !password) {
@@ -24,7 +26,7 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const { email, password } = req.body.user;
-  if ( !email || !password) {
+  if (!email || !password) {
     return res.status(300).json({ message: "fill all fealds" });
   }
   try {
@@ -35,13 +37,18 @@ const login = async (req, res) => {
         .status(404)
         .json({ message: "User dosent exist please register" });
     } else {
-      if(password!=existingUser.password){
-        return res.status(504).json({message:"password or email incorrect"});
+      if (password != existingUser.password) {
+        return res.status(504).json({ message: "password or email incorrect" });
       }
-      return res.status(200).json({user:existingUser});
 
+      let user = existingUser.toJSON();
+
+      let token = signJswtToken(user);
+
+      res.send({ message: "Logged in", token: token });
     }
   } catch (err) {
+    console.log(err);
     return res.status(400).json({ message: err });
   }
 };

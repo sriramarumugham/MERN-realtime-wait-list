@@ -2,22 +2,43 @@ require("dotenv").config();
 
 const express = require("express");
 const app = express();
-const db = require("./conifig/mongoose");
+const db = require("./config/mongoose");
 const cors = require("cors");
-const bodyParser=require('body-parser');
-
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const passport = require("passport");
 db();
 
 const PORT = process.env.PORT || 8000;
 
+
+app.use(
+  cors({
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  })
+);
+
+app.use(cookieParser());
+app.use(express.json());
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 // logger middleware
-app.use(cors({ origin: "*", methods: "GET,HEAD,PUT,PATCH,POST,DELETE" }));
-
-app.use(bodyParser());
-
 
 app.use((req, res, next) => {
-  console.log(req.session, req.cookies);
+  console.log(req.session , req.user);
   next();
 });
 
