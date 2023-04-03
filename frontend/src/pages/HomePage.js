@@ -1,8 +1,45 @@
-import React from "react";
+import React, { useEffect } from "react";
 import iphone from "../utils/iphone.png";
 import earphone from "../utils/earphone.png";
+import axios from "axios";
+import { UserState } from "../context/UserProvider";
 
 const HomePage = () => {
+
+
+  const { token } = UserState();
+
+  const getInfo = async (token) => {
+    let config = {
+      headers: {
+        Authorization: 'Bearer '+token ,
+        withCredentials: true,
+      },
+    };
+
+    axios
+      .get("http://localhost:8000/user/get-info",config )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+ 
+    const timer = setTimeout(() => {
+      if(token){
+        getInfo(token);
+      }
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+
+
+  // component
   return (
     <div className="h-[100vh] w-[100vw] bg-white overflow-x-hidden relative  flex flex-col">
       {/* original downs */}

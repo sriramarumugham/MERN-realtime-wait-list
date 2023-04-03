@@ -6,7 +6,6 @@ const db = require("./config/mongoose");
 const cors = require("cors");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
-const passport = require("passport");
 db();
 
 const PORT = process.env.PORT || 8000;
@@ -16,7 +15,7 @@ app.use(
   cors({
     origin: "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
+    // credentials: true,
   })
 );
 
@@ -31,16 +30,13 @@ app.use(
 );
 
 
-app.use(passport.initialize());
-app.use(passport.session());
-
 
 // logger middleware
 
-app.use((req, res, next) => {
-  console.log(req.session , req.user);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log(req.session , req.user);
+//   next();
+// });
 
 app.use("/", require("./routes/index"));
 
