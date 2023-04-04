@@ -5,7 +5,7 @@ const userContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [token, setToken] = useState("");
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {

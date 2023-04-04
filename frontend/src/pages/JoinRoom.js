@@ -1,32 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { UserState } from "../context/UserProvider";
+import Otp from "../components/Otp";
+import Referral from "../components/Referral";
 
 
 const JoinRoom = () => {
-  const navigate=useNavigate();
+  const { user } = UserState();
+  console.log(user);
+  const navigate = useNavigate();
+  const [email, setEmail] = useState(user.email);
+
   return (
-    <div className="flex flex-col items-center justify-start h-[100%] w-[100%]  bg-white-100 bg-slate-50">
-      <p  onClick={()=>{navigate(-1)}} className="text-4xl mb-28 mt-5  cursor-pointer">
-        {" "}
+    <div className="flex flex-col items-center justify-gap gap-10  h-[100%] w-[100%]   bg-slate-100">
+      <p
+        onClick={() => {
+          navigate(-1);
+        }}
+        className="text-4xl mt-14  cursor-pointer"
+      >
         <span>
           <i class="fa-solid fa-angle-left"></i>
-        </span>{" "}
-Home
-
-        
+        </span>
+        Home
       </p>
-
-      <div className=" w-[90%] max-w-md rounded-2xl shadow-lg bg-white m-2 p-5 pb-14">
-        <form className="flex flex-col gap-2 mt-5">
-          <label>Enter Referral code</label>
-          <input placeholder="Password" className="login-input"></input>
-          <label>Confirm Email</label>
-          <input placeholder="Password" className="login-input"></input>
-          <label>Enter OTP</label>
-          <input placeholder="Password" className="login-input"></input>
-          <button className="login-btn mt-10">Register </button>
-        </form>
-      </div>
+  {user.verified? <Referral/> : <Otp/>}
+      <Otp/>
+      {/* <Referral/> */}
+    
     </div>
   );
 };

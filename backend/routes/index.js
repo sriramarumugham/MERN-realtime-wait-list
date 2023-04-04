@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const UserOTP=require('../model/UserOTP');
+const OTP=require('../model/UserOTP');
 
 router.get("/", (req, res) => {
   res.status(200).json({ message: "api runnig" });
@@ -15,7 +15,7 @@ router.use('/user' , require('./user'));
 
 //testing route for time to live mongoose schema
 router.get('/create-otp' ,  async(req , res)=>{
-  const newOtp= await UserOTP.create({
+  const newOtp= await OTP.create({
     id:11111 , otp:111
   })
   console.log(newOtp);

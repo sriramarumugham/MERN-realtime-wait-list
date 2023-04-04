@@ -17,7 +17,7 @@ const Coupons = () => {
         </span>{" "}
         Your coupons
       </p>
-      <div className="bg-gradient-to-r bg-blue-800  h-[400px] w-[225px]  flex flex-col rounded-2xl shadow-2xl  overflow-hidden">
+      <div className="bg-gradient-to-r bg-purple-800  h-[400px] w-[225px]  flex flex-col rounded-2xl shadow-2xl  overflow-hidden">
         <div className="flex flex-col items-center justify-center h-[60%] w-[100%]  text-orange-400">
           <p className="text-3xl font-bold">25% OFF</p>
           <p className="text-2xl mt-5">IPHONE 14</p>

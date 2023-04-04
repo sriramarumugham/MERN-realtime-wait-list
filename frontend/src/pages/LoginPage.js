@@ -2,6 +2,7 @@ import React from "react";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import { useState } from "react";
+import loginBg from '../utils/loginPage.jpg'
 
 const LoginPage = () => {
   const [login, setLogin] = useState(true);
@@ -18,13 +19,14 @@ const LoginPage = () => {
         {/* bg-slate-100" */}
           {/* images */}
 
-          <div className="bg-red-200  relative  w-[0%] md:w-1/2  h-full  items-center justify-center ">
+          <div className="bg-white  relative  w-[0%] md:w-1/2  h-full  items-center justify-center ">
             <img
               className="object-cover h-[100%]  w-[100%]  "
               // src="https://cdn2.slidemodel.com/wp-content/uploads/7382-01-duotone-gradients-powerpoint-templates-16x9-2.jpg"
               // src="https://i.pinimg.com/originals/fb/f2/e8/fbf2e8b0b6fc2919c8257d1ba82f64b9.jpg"
               // src="https://i.pinimg.com/originals/c5/31/6a/c5316a227ef2e540154eb1e63ec71034.jpg"
-              src="https://cdn.nohat.cc/thumb/f/720/33215a93ed924984a12d.jpg"
+              // src="https://cdn.nohat.cc/thumb/f/720/33215a93ed924984a12d.jpg"
+              src={loginBg}
             />
             <div className="absolute  top-[15%]  h-[70%] left-[10%]  w-[80%] bg-white/[.1]  shadow-2xl  hidden md:flex justify-center items-center">
               <p className="text-lg text-white font-extrabold">

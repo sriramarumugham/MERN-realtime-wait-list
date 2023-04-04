@@ -15,5 +15,5 @@ const UserOTPSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const UserOTP = mongoose.model("UserOTP", UserOTPSchema);
-module.exports = UserOTP;
+const OTP = mongoose.model("OTP", UserOTPSchema);
+module.exports = OTP;
