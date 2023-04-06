@@ -1,7 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserState } from "../context/UserProvider";
+import axios from "axios";
 
 const Score = () => {
+  const { user, score, setScore, token } = UserState();
+
+  console.log(user, token);
+  useEffect(() => {
+    //societ io things her get the live data based on something and update the state
+    getScore();
+  }, []);
+  const getScore = async () => {
+    let config = {
+      headers: {
+        Authorization: "Bearer " + token,
+        withCredentials: true,
+      },
+    };
+
+    axios
+      .get("http://localhost:8000/user/room/get", config)
+      .then((res) => {
+        console.log(res);
+        setScore(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const navigate = useNavigate();
   return (
     <div className="flex flex-col items-center  justify-start h-[100vh] w-[100vw] gap-5 bg-white ">

@@ -4,12 +4,10 @@ import { UserState } from "../context/UserProvider";
 import Otp from "../components/Otp";
 import Referral from "../components/Referral";
 
-
 const JoinRoom = () => {
   const { user } = UserState();
-  console.log(user);
+
   const navigate = useNavigate();
-  const [email, setEmail] = useState(user.email);
 
   return (
     <div className="flex flex-col items-center justify-gap gap-10  h-[100%] w-[100%]   bg-slate-100">
@@ -24,8 +22,8 @@ const JoinRoom = () => {
         </span>
         Home
       </p>
-  {user.verified? <Referral/> : <Otp/>}
-    
+
+      {user&& user.verified ? <Referral /> : <Otp />}
     </div>
   );
 };

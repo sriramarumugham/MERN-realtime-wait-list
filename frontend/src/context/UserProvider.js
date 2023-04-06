@@ -1,11 +1,19 @@
 import { useEffect, createContext, useContext, useState } from "react";
 import { json, useNavigate } from "react-router-dom";
 
+import io, { Socket } from "socket.io-client";
+
+// export const socket = io.connect("http://localhost:8000");
+
+
+
+
 const userContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
+  const [score, setScore] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,7 +29,9 @@ const UserProvider = ({ children }) => {
   }, []);
 
   return (
-    <userContext.Provider value={{ token, setToken, user, setUser }}>
+    <userContext.Provider
+      value={{ token, setToken, user, setUser, score, setScore }}
+    >
       {children}
     </userContext.Provider>
   );
@@ -30,5 +40,6 @@ const UserProvider = ({ children }) => {
 export const UserState = () => {
   return useContext(userContext);
 };
+
 
 export default UserProvider;
