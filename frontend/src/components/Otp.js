@@ -2,17 +2,35 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserState } from "../context/UserProvider";
 import otpImg from "../utils/otpPurple.png";
-
+import  axios from 'axios'
 const Otp = () => {
-  const { user } = UserState();
-  console.log(user);
+
+  const { token, setUser, user } = UserState();
+
   const navigate = useNavigate();
   const [email, setEmail] = useState(user.email);
   const [verifying, setVerifying] = useState(false);
   const [userOTP, setUSerOTP] = useState("");
-  const handleVerification = (e) => {
+
+
+
+
+  const handleVerification = async(e) => {
     setVerifying(true);
     e.preventDefault();
+
+    let config = {
+      headers: {
+        Authorization: "Bearer " + token,
+        withCredentials: true,
+      },
+    };
+
+
+    await axios.get('http://localhost:8000/user/get-otp' ,config ).then((res)=>{
+      console.log(res);
+    }).catch((err)=>{console.log(err)});
+
   };
   return (
     <div className="w-[100%] sm:w-[90%] max-w-md flex-1 sm:h-[80%] pb-4 mb-16 sm:mb-5 sm:rounded-lg sm:shadow-lg  flex flex-col justify-start items-center">

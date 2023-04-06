@@ -2,6 +2,10 @@ const router = require("express").Router();
 
 
 const { sendEMail } = require("../controller/Nodemailer");
+
+const {protected} =require('../middleware/protected');
+
+
 const OTP=require('../model/UserOTP');
 
 router.get("/", (req, res) => {
@@ -24,6 +28,5 @@ router.get('/create-otp' ,  async(req , res)=>{
   res.send(newOtp);
 })
 
-router.get('/send-email' , sendEMail);
 
 module.exports = router;
