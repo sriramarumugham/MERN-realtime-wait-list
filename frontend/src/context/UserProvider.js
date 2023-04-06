@@ -14,7 +14,10 @@ const UserProvider = ({ children }) => {
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
   const [score, setScore] = useState([]);
+  const { referral, setReferral } = useState("REFERRAL");
+
   const navigate = useNavigate();
+
 
   useEffect(() => {
     let userInfo = localStorage.getItem("signedJWT");
@@ -30,7 +33,7 @@ const UserProvider = ({ children }) => {
 
   return (
     <userContext.Provider
-      value={{ token, setToken, user, setUser, score, setScore }}
+      value={{ token, setToken, user, setUser, score, setScore , referral ,setReferral }}
     >
       {children}
     </userContext.Provider>

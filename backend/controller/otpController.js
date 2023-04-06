@@ -19,6 +19,7 @@ const createOtp = async (req, res, next) => {
     return res.status(500).json({ error });
   }
 };
+
 const sendEMail = (req, res) => {
   const transporter = nodemailer.createTransport(emailConfig);
 
@@ -59,6 +60,7 @@ const sendEMail = (req, res) => {
       return res.status(500).json({ error });
     });
 };
+
 const verifyOtp = async (req, res) => {
   try {
     const { email } = req.user;

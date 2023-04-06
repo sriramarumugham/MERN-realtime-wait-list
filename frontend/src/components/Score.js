@@ -4,13 +4,16 @@ import { UserState } from "../context/UserProvider";
 import axios from "axios";
 
 const Score = () => {
-  const { user, score, setScore, token } = UserState();
+  const { user, score, setScore, token, referral, setReferral } = UserState();
 
-  console.log(user, token);
+  const navigate = useNavigate();
+
   useEffect(() => {
     //societ io things her get the live data based on something and update the state
     getScore();
   }, []);
+
+  //api request
   const getScore = async () => {
     let config = {
       headers: {
@@ -23,14 +26,13 @@ const Score = () => {
       .get("http://localhost:8000/user/room/get", config)
       .then((res) => {
         console.log(res);
-        setScore(res.data);
+        setScore(res.data.scores);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const navigate = useNavigate();
   return (
     <div className="flex flex-col items-center  justify-start h-[100vh] w-[100vw] gap-5 bg-white ">
       <p
@@ -48,26 +50,24 @@ const Score = () => {
         {/* ranklist */}
         <div className="flex h-[65%] w-[90%] bg-white">
           <ul className="w-[100%] flex flex-col gap-2">
-            <li className=" bg-purple-100 w-[100%] px-5 py-2 rounded-lg">
-              {" "}
-              <span bg-blue-100> #{1}</span> Sreeram
-            </li>
-            <li className=" bg-purple-100 w-[100%] px-5 py-2 rounded-lg">
-              {" "}
-              <span> #{1}</span> Sreeram
-            </li>
-            <li className=" bg-purple-100 w-[100%] px-5 py-2 rounded-lg">
-              {" "}
-              <span> #{1}</span> Sreeram
-            </li>
-            <li className=" bg-purple-100 w-[100%] px-5 py-2 rounded-lg">
-              {" "}
-              <span> #{1}</span> Sreeram
-            </li>
-            <li className=" bg-purple-300 w-[100%] px-5 py-2 rounded-lg">
-              {" "}
-              <span> #{1}</span> Sreeram
-            </li>
+            {score.map((item) => {
+              return (
+                <li
+                  key={item._id}
+                  className={`${
+                    item.user && item.user.email == user.email
+                      ? "bg-purple-300"
+                      : "bg-purple-100"
+                  }  w-[100%] px-5 py-2 rounded-lg flex justify-start gap-[10%]`}
+                >
+                  <span className="font-bold"> #{item.score} </span>
+                  <span className="font-bold">
+                    {" "}
+                    {item.user ? item.user.name : ""}
+                  </span>
+                </li>
+              );
+            })}
           </ul>
         </div>
 
@@ -75,12 +75,25 @@ const Score = () => {
 
         <div className="flex flex-col w-[90%]  h-[30%]   max-w-lg ">
           <div className="flex  flex-col  items-center justify-center border-3 rounded-lg shadow-lg mb-4 bg-purple-600 p-5">
-            <p className="text-lg font-bold text-orange-200">
-              Your code AKHKJHK
+            {/* <p className="text-lg font-bold text-orange-200">
+              Your code <span className="font-extrabold">{referral ? referral: ""}</span>
               <span>
                 <i class="fa-regular fa-clipboard mx-3"></i>
               </span>{" "}
-            </p>
+            </p> */}
+
+            {score.map((item) => {
+              if (item.user && user && item.user.email == user.email)
+                return (
+                  <p className="text-lg font-bold text-orange-200">
+                    Your code{" "}
+                    <span className="font-extrabold">{item.referralCode}</span>
+                    <span>
+                      <i class="fa-regular fa-clipboard mx-3"></i>
+                    </span>
+                  </p>
+                );
+            })}
           </div>
           {/* infstruction */}
           <div className="flex flex-col items-center justify-center">

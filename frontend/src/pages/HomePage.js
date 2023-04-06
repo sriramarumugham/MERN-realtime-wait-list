@@ -34,7 +34,8 @@ const HomePage = () => {
     return () => clearTimeout(timer);
   }, [token]);
 
-  // component
+  //global variable 
+  
   return (
     <div className="h-[100vh] w-[100vw] bg-white overflow-x-hidden relative  flex flex-col">
       {/* original downs */}
@@ -57,7 +58,8 @@ const HomePage = () => {
         </div>
       </div>
       <div className=" mt-[-10%]  w-[100%] flex-1 flex justify-center items-center">
-        <div className="mt-[10%]   md:mt-[7%] sm:mx-[10%] ">
+        {user && (
+          <div className="mt-[10%]   md:mt-[7%] sm:mx-[10%] ">
           {/* not registerd for the iphone  */}
           {!user.joinedRoom && (
             <p className=" text-2xl cursor-pointer sm:text-2xl md:text-4xl bg-clip-text   text-transparent bg-gradient-to-r  from-indigo-800 via-purple-700 to-pink-600  ">
@@ -81,6 +83,7 @@ const HomePage = () => {
             </p>
           )}
         </div>
+        )}
       </div>
     </div>
   );
