@@ -25,8 +25,6 @@ const JoinRoom = () => {
         Home
       </p>
   {user.verified? <Referral/> : <Otp/>}
-      <Otp/>
-      {/* <Referral/> */}
     
     </div>
   );
