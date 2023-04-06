@@ -25,7 +25,7 @@ const Score = () => {
     axios
       .get("http://localhost:8000/user/room/get", config)
       .then((res) => {
-        console.log(res);
+        console.log("got scores");
         setScore(res.data.scores);
       })
       .catch((err) => {
@@ -85,7 +85,10 @@ const Score = () => {
             {score.map((item) => {
               if (item.user && user && item.user.email == user.email)
                 return (
-                  <p className="text-lg font-bold text-orange-200">
+                  <p
+                    key={item._id}
+                    className="text-lg font-bold text-orange-200"
+                  >
                     Your code{" "}
                     <span className="font-extrabold">{item.referralCode}</span>
                     <span>

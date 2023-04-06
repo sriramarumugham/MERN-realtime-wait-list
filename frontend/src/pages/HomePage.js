@@ -34,8 +34,8 @@ const HomePage = () => {
     return () => clearTimeout(timer);
   }, [token]);
 
-  //global variable 
-  
+  //global variable
+
   return (
     <div className="h-[100vh] w-[100vw] bg-white overflow-x-hidden relative  flex flex-col">
       {/* original downs */}
@@ -60,29 +60,29 @@ const HomePage = () => {
       <div className=" mt-[-10%]  w-[100%] flex-1 flex justify-center items-center">
         {user && (
           <div className="mt-[10%]   md:mt-[7%] sm:mx-[10%] ">
-          {/* not registerd for the iphone  */}
-          {!user.joinedRoom && (
-            <p className=" text-2xl cursor-pointer sm:text-2xl md:text-4xl bg-clip-text   text-transparent bg-gradient-to-r  from-indigo-800 via-purple-700 to-pink-600  ">
-              <Link to={"/early-register"}> Register</Link>
-              <i class="fa-solid fa-chevron-right"></i>
-            </p>
-          )}
-          {/* user register for iphone */}
-          {user.joinedRoom && (
-            <p className=" text-2xl cursor-pointer sm:text-2xl md:text-4xl bg-clip-text   text-transparent bg-gradient-to-r  from-indigo-800 via-purple-700 to-pink-600  ">
-              <Link to={"/leader-board"}> Leader bord</Link>
-              <i class="fa-solid fa-chevron-right"></i>
-            </p>
-          )}
+            {/* not registerd for the iphone  */}
+            {!user.joinedRoom && (
+              <p className=" text-2xl cursor-pointer sm:text-2xl md:text-4xl bg-clip-text   text-transparent bg-gradient-to-r  from-indigo-800 via-purple-700 to-pink-600  ">
+                <Link to={"/early-register"}> Register</Link>
+                <i class="fa-solid fa-chevron-right"></i>
+              </p>
+            )}
+            {/* user register for iphone */}
+            {user.joinedRoom && (
+              <p className=" text-2xl cursor-pointer sm:text-2xl md:text-4xl bg-clip-text   text-transparent bg-gradient-to-r  from-indigo-800 via-purple-700 to-pink-600  ">
+                <Link to={"/leader-board"}> Leader bord</Link>
+                <i class="fa-solid fa-chevron-right"></i>
+              </p>
+            )}
 
-          {/* user registerd for the iphone and got postin 1 in the leaderboard */}
-          {user.winner && (
-            <p className=" text-2xl cursor-pointer sm:text-2xl md:text-4xl bg-clip-text   text-transparent bg-gradient-to-r  from-indigo-800 via-purple-700 to-pink-600  ">
-              <Link to={"/reedem-coupons"}> Claim coupons</Link>
-              <i class="fa-solid fa-chevron-right"></i>
-            </p>
-          )}
-        </div>
+            {/* user registerd for the iphone and got postin 1 in the leaderboard */}
+            {user.winner && (
+              <p className=" text-2xl cursor-pointer sm:text-2xl md:text-4xl bg-clip-text   text-transparent bg-gradient-to-r  from-indigo-800 via-purple-700 to-pink-600  ">
+                <Link to={"/reedem-coupons"}> Claim coupons</Link>
+                <i class="fa-solid fa-chevron-right"></i>
+              </p>
+            )}
+          </div>
         )}
       </div>
     </div>

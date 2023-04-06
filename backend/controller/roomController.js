@@ -114,7 +114,7 @@ const generateReferral = (length) => {
 
 const getScores = async (req, res) => {
   try {
-    let scores = await Room.find().populate("user").sort({ score: -1 });
+    let scores = await Room.find().populate("user").sort({ score: 1 });
     return res.status(200).json({ scores: scores });
   } catch (err) {
     console.log(err);
