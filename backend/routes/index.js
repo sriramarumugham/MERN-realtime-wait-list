@@ -1,12 +1,12 @@
 const router = require("express").Router();
 
 
-const { sendEMail } = require("../controller/Nodemailer");
+const { sendEMail } = require("../controller/otpController");
 
 const {protected} =require('../middleware/protected');
 
 
-const OTP=require('../model/UserOTP');
+const OTP=require('../model/OTP');
 
 router.get("/", (req, res) => {
   res.status(200).json({ message: "api runnig" });
@@ -20,13 +20,7 @@ router.use('/user' , require('./user'));
 
 
 //testing route for time to live mongoose schema
-router.get('/create-otp' ,  async(req , res)=>{
-  const newOtp= await OTP.create({
-    id:11111 , otp:111
-  })
-  console.log(newOtp);
-  res.send(newOtp);
-})
+
 
 
 module.exports = router;

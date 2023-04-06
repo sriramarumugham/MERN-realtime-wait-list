@@ -1,23 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserState } from "../context/UserProvider";
 import otpImg from "../utils/otpPurple.png";
-import  axios from 'axios'
+import axios from "axios";
+import CountDown from "./CountDown";
 const Otp = () => {
-
   const { token, setUser, user } = UserState();
 
+  const validateOTPbutton = useRef();
+
   const navigate = useNavigate();
-  const [email, setEmail] = useState(user.email);
   const [verifying, setVerifying] = useState(false);
   const [userOTP, setUSerOTP] = useState("");
+  const [checkOTP, setCheckOTP] = useState(false);
 
+  useEffect(() => {
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
-
-
-  const handleVerification = async(e) => {
+  const handleVerification = async (e) => {
     setVerifying(true);
     e.preventDefault();
+    console.log("Sending opt");
 
     let config = {
       headers: {
@@ -26,12 +33,62 @@ const Otp = () => {
       },
     };
 
-
-    await axios.get('http://localhost:8000/user/get-otp' ,config ).then((res)=>{
-      console.log(res);
-    }).catch((err)=>{console.log(err)});
-
+    await axios
+      .get("http://localhost:8000/user/get-otp", config)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        setVerifying(false);
+        setUSerOTP("");
+        setCheckOTP(false);
+      });
   };
+
+  const handleBeforeUnload = (e) => {
+    e.preventDefault();
+    const message =
+      "Are you sure you want to leave? All provided data will be lost.";
+    e.returnValue = message;
+    return message;
+  };
+
+  const verifyOTP = async (e) => {
+    e.preventDefault();
+    setCheckOTP(!checkOTP);
+    validateOTPbutton.current.innerText = "VERIFYING OTP";
+    if (userOTP) {
+      console.log("verifyingOtp", userOTP);
+
+      let config = {
+        headers: {
+          Authorization: "Bearer " + token,
+          withCredentials: true,
+        },
+      };
+
+      await axios
+        .post("http://localhost:8000/user/verify-otp" ,{ otp: userOTP },  config, )
+        .then((res) => {
+          console.log(res.data);
+          if(res.data && res.data.user){
+            let updatedUser=res.data.user;
+            console.log(updatedUser);
+            setUser(updatedUser);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          setVerifying(false);
+          setUSerOTP("");
+          setCheckOTP(false);
+    validateOTPbutton.current.innerText = "INVALID";
+    navigate(-1);
+        });
+    }
+  };
+
   return (
     <div className="w-[100%] sm:w-[90%] max-w-md flex-1 sm:h-[80%] pb-4 mb-16 sm:mb-5 sm:rounded-lg sm:shadow-lg  flex flex-col justify-start items-center">
       <img
@@ -44,24 +101,36 @@ const Otp = () => {
           You will get an to <span className="font-bold underline"> OTP</span>{" "}
           via email
         </p>
-        <p className="font-thin">
-          Expories in <span className="font-bold "> 05:00</span>{" "}
-        </p>
+
+        {verifying ? (
+          <CountDown
+            resendOTP={handleVerification}
+            setVerifying={setVerifying}
+            verifying={verifying}
+          />
+        ) : (
+          <p className="font-thin">
+            Expires in : <span className="font-bold ">00:10</span>
+          </p>
+        )}
 
         <form className="flex flex-col  h-[100%] justify-start gap-5 items-center  mt-10">
           <input
-            disabled={!verifying}
+            disabled={!verifying || checkOTP}
             placeholder="Enter opt"
             type="password"
             className="w-[100%] login-input placeholder:text-slate-800 disabled:bg-slate-100 disabled:border-slate-200 disabled:placeholder:text-slate-300"
             onChange={(e) => setUSerOTP(e.target.value)}
           />
           <button
-            disabled={!userOTP.length >= 1 && verifying}
+            disabled={checkOTP || (!userOTP.length > 3 && verifying)}
+            ref={validateOTPbutton}
             onClick={(e) => {
-              handleVerification(e);
+              {
+                verifying ? verifyOTP(e) : handleVerification(e);
+              }
             }}
-            className="w-[100%]  bg-purple-600 hover:bg-purple-500 active:bg-purple-400 disabled:bg-purple-200 text-white text-lg px-5 py-1 rounded-lg"
+            className="w-[100%]   bg-purple-600 hover:bg-purple-500 active:bg-purple-400 disabled:bg-purple-200 text-white text-lg px-5 py-1 rounded-lg"
           >
             {verifying ? "VALIDATE" : "GET OTP"}
           </button>
