@@ -3,13 +3,13 @@ import JoinRoom from "./pages/JoinRoom";
 import LeaderBoard from "./pages/LeaderBoard";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CouponsPage from "./pages/CouponsPage";
 
 import io from "socket.io-client";
-const socket = io.connect("http://localhost:8000");
+
+const socket = io.connect(process.env.REACT_APP_BASE_URL);
 
 function App() {
   return (

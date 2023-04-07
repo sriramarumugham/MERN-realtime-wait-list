@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
 
 const User = require("../model/User");
+
+//jwt passed in header
 const protected = async (req, res, next) => {
   try {
     if (

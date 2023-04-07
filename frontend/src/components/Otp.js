@@ -4,6 +4,7 @@ import { UserState } from "../context/UserProvider";
 import otpImg from "../utils/otpPurple.png";
 import axios from "axios";
 import CountDown from "./CountDown";
+import { toast } from "react-toastify";
 const Otp = () => {
   const { token, setUser, user } = UserState();
 
@@ -33,8 +34,10 @@ const Otp = () => {
       },
     };
 
+
+
     await axios
-      .get("http://localhost:8000/user/get-otp", config)
+      .get(`${process.env.REACT_APP_BASE_URL}/user/get-otp`, config)
       .then((res) => {
         console.log(res);
       })
@@ -69,11 +72,12 @@ const Otp = () => {
       };
 
       await axios
-        .post("http://localhost:8000/user/verify-otp" ,{ otp: userOTP },  config, )
+        .post(`${process.env.REACT_APP_BASE_URL}/user/verify-otp` ,{ otp: userOTP },  config, )
         .then((res) => {
           console.log(res.data);
           if(res.data && res.data.user){
             let updatedUser=res.data.user;
+            toast.success("Email verified")
             console.log(updatedUser);
             setUser(updatedUser);
           }

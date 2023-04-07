@@ -31,7 +31,7 @@ const Referral = ({socket}) => {
 
     await axios
       .post(
-        "http://localhost:8000/user/room/join",
+        `${process.env.REACT_APP_BASE_URL}/user/room/join`,
         { referral: referral },
         config
       )

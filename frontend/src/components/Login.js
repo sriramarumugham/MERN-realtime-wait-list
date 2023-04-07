@@ -25,8 +25,9 @@ const Login = ({ handleLogin }) => {
     }
     setLoding(true);
     const user = { email, password };
+
     axios
-      .post("http://localhost:8000/auth/login", {
+      .post(`${process.env.REACT_APP_BASE_URL}/auth/login`, {
         user: user,
         withCredentials: true,
       })

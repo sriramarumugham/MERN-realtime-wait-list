@@ -25,8 +25,9 @@ const Register = ({ handleLogin }) => {
     }
     setLoding(true);
     const user = { name, email, password };
+
     axios
-      .post("http://localhost:8000/auth/register", {
+      .post(`${process.env.REACT_APP_BASE_URL}/auth/register`, {
         user,
       })
       .then((response) => {

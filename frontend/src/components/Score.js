@@ -25,9 +25,9 @@ const Score = ({ socket }) => {
         withCredentials: true,
       },
     };
-
+    
     axios
-      .get("http://localhost:8000/user/room/get", config)
+      .get(`${process.env.REACT_APP_BASE_URL}/user/room/get`, config)
       .then((res) => {
         console.log("got leaderboard");
         setScore(res.data.scores);

@@ -17,9 +17,10 @@ const HomePage = () => {
         withCredentials: true,
       },
     };
+    // console.log(process.env.REACT_APP_BASE_URL);
 
     axios
-      .get("http://localhost:8000/user/get-info", config)
+      .get(`${process.env.REACT_APP_BASE_URL}/user/get-info`, config)
       .then((response) => {
         const { user } = response.data;
         setUser(user);
