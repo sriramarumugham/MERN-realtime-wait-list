@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserState } from "../context/UserProvider";
+
 import axios from "axios";
 
-const Score = () => {
+const Score = ({ socket }) => {
   const { user, score, setScore, token, referral, setReferral } = UserState();
 
   const navigate = useNavigate();
 
   useEffect(() => {
     //societ io things her get the live data based on something and update the state
+    socket.on("updated-leaderboard", (scores) => {
+      setScore(scores);
+    });
     getScore();
   }, []);
 
@@ -33,6 +37,10 @@ const Score = () => {
       });
   };
 
+  const copy = async (text) => {
+    await navigator.clipboard.writeText(text);
+    console.log("copied", text);
+  };
   return (
     <div className="flex flex-col items-center  justify-start h-[100vh] w-[100vw] gap-5 bg-white ">
       <p
@@ -60,7 +68,10 @@ const Score = () => {
                       : "bg-purple-100"
                   }  w-[100%] px-5 py-2 rounded-lg flex justify-start gap-[10%]`}
                 >
-                  <span className="font-bold"> #{item.score} </span>
+                  <span className="font-bold">
+                    {" "}
+                    #{item.score <= 0 ? 1 : item.score}{" "}
+                  </span>
                   <span className="font-bold">
                     {" "}
                     {item.user ? item.user.name : ""}
@@ -73,21 +84,17 @@ const Score = () => {
 
         {/* referral link */}
 
-        <div className="flex flex-col w-[90%]  h-[30%]   max-w-lg ">
-          <div className="flex  flex-col  items-center justify-center border-3 rounded-lg shadow-lg mb-4 bg-purple-600 p-5">
-            {/* <p className="text-lg font-bold text-orange-200">
-              Your code <span className="font-extrabold">{referral ? referral: ""}</span>
-              <span>
-                <i class="fa-regular fa-clipboard mx-3"></i>
-              </span>{" "}
-            </p> */}
-
+        <div className="flex flex-col w-[90%]  h-[30%]   max-w-lg cursor-pointer ">
+          <div className="flex   flex-col  items-center justify-center border-3 rounded-lg shadow-lg mb-4 bg-purple-600 p-5">
             {score.map((item) => {
               if (item.user && user && item.user.email == user.email)
                 return (
                   <p
                     key={item._id}
-                    className="text-lg font-bold text-orange-200"
+                    className="text-lg font-bold text-orange-200 "
+                    onClick={() => {
+                      copy(item.referralCode);
+                    }}
                   >
                     Your code{" "}
                     <span className="font-extrabold">{item.referralCode}</span>

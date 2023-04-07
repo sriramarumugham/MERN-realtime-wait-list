@@ -12,7 +12,7 @@ const createOtp = async (req, res, next) => {
       email: req.user.email,
       otp: randomNumber,
     });
-    console.log(createdOTP);
+    console.log("createdOTP" , createdOTP.otp);
     req.otp = createdOTP.otp;
     next();
   } catch (error) {
@@ -50,7 +50,7 @@ const sendEMail = (req, res) => {
   transporter
     .sendMail(mailOptions)
     .then((info) => {
-      console.log(info);
+      console.log("email sent");
       return res.status(201).json({
         message: "you should receive an email",
         email: info,
@@ -71,7 +71,7 @@ const verifyOtp = async (req, res) => {
 
     for (let userOTP of usersOTPs) {
       if (userOTP.otp == otp) {
-        console.log(userOTP);
+        console.log("user enterd OTP");
         await User.findOneAndUpdate(
           { email: userOTP.email },
           { verified: true }

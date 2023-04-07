@@ -4,7 +4,7 @@ import referralImg from "../utils/referral.png";
 import { UserState } from "../context/UserProvider";
 import { useNavigate } from "react-router-dom";
 
-const Referral = () => {
+const Referral = ({socket}) => {
   const [referral, setReferral] = useState("");
 
   const navigate = useNavigate();
@@ -36,17 +36,21 @@ const Referral = () => {
         config
       )
       .then((res) => {
-        console.log(res.data);
         if (res.status == 200) {
           setUser(res.user);
+
+          console.log(res.data);
+          
+          socket.emit('update-leaderboard' , "send me the updated leaderboard");
           navigate(-2);
-          // navigate to leaderboard
         }
       })
+
       .catch((err) => {
         console.log(err);
       });
   };
+
   const handleReferral = (e) => {
     setReferral(e.target.value);
   };
@@ -59,6 +63,7 @@ const Referral = () => {
     return message;
   };
 
+  //changes happens heree
   return (
     <div className="w-[100%] sm:w-[90%] max-w-md flex-1 sm:h-[80%] pb-4 mb-16 sm:mb-5 sm:rounded-lg sm:shadow-lg  flex flex-col justify-start items-center">
       <img className="h-[30%] ml-10 mt-10 " src={referralImg}></img>

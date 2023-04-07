@@ -16,7 +16,7 @@ const register = async (req, res) => {
         .json({ message: "User alredy exist please login" });
     } else {
       const createdUser = await User.create({ name, email, password });
-      console.log(createdUser);
+      console.log("user created");
       return res.status(200).json({ user: createdUser });
     }
   } catch (err) {

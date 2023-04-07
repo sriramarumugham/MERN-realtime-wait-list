@@ -3,10 +3,12 @@ import iphone from "../utils/iphone.png";
 import earphone from "../utils/earphone.png";
 import axios from "axios";
 import { UserState } from "../context/UserProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const { token, setUser, user } = UserState();
+
+  const navigate = useNavigate();
 
   const getInfo = async (token) => {
     let config = {
@@ -23,7 +25,11 @@ const HomePage = () => {
         setUser(user);
       })
       .catch((err) => {
-        console.log(err);
+        localStorage.removeItem("signedJWT");
+
+        console.log("invlaid jwt user not authenticated");
+        // console.log(err);
+        navigate("/");
       });
   };
 
@@ -70,15 +76,15 @@ const HomePage = () => {
             {/* user register for iphone */}
             {user.joinedRoom && (
               <p className=" text-2xl cursor-pointer sm:text-2xl md:text-4xl bg-clip-text   text-transparent bg-gradient-to-r  from-indigo-800 via-purple-700 to-pink-600  ">
-                <Link to={"/leader-board"}> Leader bord</Link>
-                <i class="fa-solid fa-chevron-right"></i>
+                <Link to={"/leader-board"}> Leaderbord</Link>
+                <i className="fa-solid fa-chevron-right"></i>
               </p>
             )}
 
             {/* user registerd for the iphone and got postin 1 in the leaderboard */}
             {user.winner && (
               <p className=" text-2xl cursor-pointer sm:text-2xl md:text-4xl bg-clip-text   text-transparent bg-gradient-to-r  from-indigo-800 via-purple-700 to-pink-600  ">
-                <Link to={"/reedem-coupons"}> Claim coupons</Link>
+                <Link to={"/reedem-coupons"}> Coupons</Link>
                 <i class="fa-solid fa-chevron-right"></i>
               </p>
             )}

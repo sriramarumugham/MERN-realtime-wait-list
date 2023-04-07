@@ -1,6 +1,6 @@
 const userInfo = (req, res) => {
   try {
-    console.log(req.user);
+    console.log("verifying user with jwt");
     let userId = req.user;
     return res.status(200).json({ user: userId });
   } catch (err) {

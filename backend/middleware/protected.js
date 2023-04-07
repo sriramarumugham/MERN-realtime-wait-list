@@ -17,7 +17,7 @@ const protected = async (req, res, next) => {
         if (isValid) {
           // console.log("protected verified", isValid);
           req.user = isValid;
-          console.log(req.user);
+          // console.log(req.user);
           next();
         } else {
           res.status(400).send({ message: "user dosent exist" });

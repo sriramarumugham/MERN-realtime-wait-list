@@ -20,12 +20,11 @@ const joinRoom = async (req, res) => {
       if (referredUser) {
         let updatedReferredUser = await Room.findOneAndUpdate(
           { _id: referredUser.id },
-          { $inc: { score: -10 } },
+          { $inc: { score: -100 } },
           { new: true }
         );
-        // send the new list realime
 
-        console.log(updatedReferredUser);
+        console.log("updated Referred Users socre" , updatedReferredUser.score);
 
         //check if he is a winner
 
@@ -46,32 +45,22 @@ const joinRoom = async (req, res) => {
             html: `<p>You  25% off on  a iphone</p> `,
           };
 
-          transporter
-            .sendMail(mailOptions)
-            .then((info) => {
-              console.log(info);
-              return res.status(201).json({
-                message: "you should receive an email",
-                email: info,
-              });
-            })
-            .catch((error) => {
-              return res.status(500).json({ error });
-            });
+          const info = await transporter.sendMail(mailOptions);
+          console.log("email sent to winner", info);
         }
       }
     }
     //creat a room for a user the add the user to the room give him score;
 
     let randomeCode = generateReferral(6);
-    console.log(randomeCode);
+    console.log("generated referral code", randomeCode);
 
     let createdRoom = await Room.create({
       user: user,
       score: 100,
       referralCode: randomeCode,
     });
-    console.log("createdRoom", createdRoom);
+    console.log("createdRoom");
 
     let updatedUser = await User.findOneAndUpdate(
       { email: user.email },
@@ -79,7 +68,7 @@ const joinRoom = async (req, res) => {
       { new: true }
     );
 
-    console.log("updatedUser", updatedUser);
+    console.log("updatedUser");
 
     return res.status(200).json({
       message: "joined the room ",
@@ -121,5 +110,6 @@ const getScores = async (req, res) => {
     return res.status(404).json({ message: err });
   }
 };
-
 module.exports = { joinRoom, getScores };
+
+// https://www.freecodecamp.org/news/build-a-realtime-chat-app-with-react-express-socketio-and-harperdb/

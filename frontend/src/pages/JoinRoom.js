@@ -4,7 +4,10 @@ import { UserState } from "../context/UserProvider";
 import Otp from "../components/Otp";
 import Referral from "../components/Referral";
 
-const JoinRoom = () => {
+
+
+
+const JoinRoom = ({socket}) => {
   const { user } = UserState();
 
   const navigate = useNavigate();
@@ -23,7 +26,7 @@ const JoinRoom = () => {
         Home
       </p>
 
-      {user&& user.verified ? <Referral /> : <Otp />}
+      {user&& user.verified ? <Referral  socket={socket} /> : <Otp />}
     </div>
   );
 };
