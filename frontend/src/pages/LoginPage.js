@@ -2,7 +2,7 @@ import React from "react";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import { useState } from "react";
-import loginBg from '../utils/loginPage.jpg'
+import loginBg from "../utils/loginPage.jpg";
 
 const LoginPage = () => {
   const [login, setLogin] = useState(true);
@@ -13,12 +13,11 @@ const LoginPage = () => {
     <>
       <div className="bg-purple-100/50  h-[100vh] w-[100vw] flex items-center justify-center sm:p-5 md:p-10">
         {/* originnal down */}
-      {/* <div className="bg-purple-100/50  h-screen w-screen flex items-center justify-center sm:p-5 md:p-10"> */}
+        {/* <div className="bg-purple-100/50  h-screen w-screen flex items-center justify-center sm:p-5 md:p-10"> */}
 
-        <div className=" p-5 sm:p-6 md:p-2 shadow-lg flex items-center  gap-0 justify-center h-[100%]  w-[100%]  max-w-5xl  rounded-lg ">" 
-        {/* bg-slate-100" */}
+        <div className=" p-5 sm:p-6 md:p-2 shadow-lg flex items-center  gap-0 justify-center h-[100%]  w-[100%]  max-w-5xl  rounded-lg ">
+          "{/* bg-slate-100" */}
           {/* images */}
-
           <div className="bg-white  relative  w-[0%] md:w-1/2  h-full  items-center justify-center ">
             <img
               className="object-cover h-[100%]  w-[100%]  "
@@ -28,10 +27,9 @@ const LoginPage = () => {
               // src="https://cdn.nohat.cc/thumb/f/720/33215a93ed924984a12d.jpg"
               src={loginBg}
             />
-            <div className="absolute  top-[15%]  h-[70%] left-[10%]  w-[80%] bg-white/[.1]  shadow-2xl  hidden md:flex justify-center items-center">
-              <p className="text-lg text-white font-extrabold">
-                Early registration{" "}
-              </p>
+            <div className="absolute  top-[15%]   flex-col h-[70%] left-[10%]  w-[80%] bg-white/[.1]  shadow-2xl  hidden md:flex justify-center items-center">
+              <p className="text-4xl text-white font-light">Don't Wait</p>
+              <p className="text-4xl text-white font-light">Register Early</p>
             </div>
           </div>
           {/* login/signup */}
