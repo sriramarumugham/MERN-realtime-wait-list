@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// time to live schema for storing otp and verifying the entered otp
 const UserOTPSchema = new mongoose.Schema(
   {
     email:{

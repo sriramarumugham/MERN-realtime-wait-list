@@ -10,8 +10,10 @@ const PORT = process.env.PORT || 8000;
 const Room = require("./model/Room");
 db();
 
+//creating our app
 const app = express();
 
+// cors to allow all  request
 app.use(
   cors({
     origin: "*",
@@ -20,15 +22,24 @@ app.use(
   })
 );
 
+//creating a http server for socket io functinoaly else we can got with expres app
+
 const server = require("http").Server(app);
+
+// initializing socket
 const io = socketio(server, {
   cors: {
     origin: "*",
   },
 });
 
+//decode the cookie if storing the jwt in cookie
 app.use(cookieParser());
+
+// to mkae user of json  request send in body by the user
 app.use(express.json());
+
+//encode and decode the session sotrage 
 app.use(
   session({
     secret: "keyboard cat",
@@ -40,22 +51,29 @@ app.use(
 //routes
 app.use("/", require("./routes/index"));
 
+//starting our server http 
 server.listen(PORT, () => {
   console.log("server running on port", PORT);
 });
 
+// event based socket io connection 
 io.on("connection", (socket) => {
+  //conection user
   console.log(`Socket ${socket.id} connected`);
 
+  //function to upadate the leaderboard realitme 
   socket.on("update-leaderboard", async (leaderboard) => {
     try {
+      //get teh updated scores
       let scores = await Room.find().populate("user").sort({ score: 1 });
       console.log(scores);
+      //sendt it to the user
       io.emit("updated-leaderboard", scores);
     } catch (error) {
       console.log("scoket couldnt get scores", error);
     }
   });
+  //cleanup 
   socket.on("disconnect", (socket) => {
     console.log(`socket ${socket.id} disconnected`);
   });

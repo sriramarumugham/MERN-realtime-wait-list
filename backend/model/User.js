@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+
+//user with list of check list check list
 const UserSchema = new mongoose.Schema(
   {
     name: {

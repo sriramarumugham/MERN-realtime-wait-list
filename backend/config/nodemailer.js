@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 
+//sender  email and password for nodemailer smpt transporter 
 const emailConfig = {
   service: "gmail",
   secure: true,

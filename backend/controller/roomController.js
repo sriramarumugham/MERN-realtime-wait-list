@@ -5,10 +5,15 @@ const nodemailer = require("nodemailer");
 
 require("dotenv").config();
 
+
+// register the user for the iphon 14 
 const joinRoom = async (req, res) => {
   try {
+
+    // protected route gets user from the middleware
     const user = req.user;
 
+    //getting the referral code send by user
     const { referral } = req.body;
 
     console.log("referral checking");
@@ -16,28 +21,38 @@ const joinRoom = async (req, res) => {
     //increase the score for the referred user;
 
     if (referral.length > 0) {
+
+      //finding the referral code from db
       let referredUser = await Room.findOne({ referralCode: referral });
 
       //send rewards to referred users;
       if (referredUser) {
+
+        //function to send emial and update the rewarsd from the referred user
         let result = await referredUserRewards(referredUser);
+
         if (!result) {
           console.log("Coudnt send the rewards for referred user");
         }
       }
     }
+
     //creat a room for a user the add the user to the room give him score;
 
+    //a fucntion to get a random referral for user trying to register
     let randomeCode = generateReferral(6);
     console.log("generated referral code", randomeCode);
 
+    //add the user to the list by creatign a room for the user
     let createdRoom = await Room.create({
       user: user,
       score: 100,
       referralCode: randomeCode,
     });
+
     console.log("createdRoom");
 
+    // update the user schema to joined room =true;
     let updatedUser = await User.findOneAndUpdate(
       { email: user.email },
       { joinedRoom: true },
@@ -46,6 +61,7 @@ const joinRoom = async (req, res) => {
 
     console.log("updatedUser");
 
+    //sending the user and room to the client
     return res.status(200).json({
       message: "joined the room ",
       user: {
@@ -137,6 +153,7 @@ const generateReferral = (length) => {
 const getScores = async (req, res) => {
   try {
     let scores = await Room.find().populate("user").sort({ score: 1 });
+    console.log("sending the updated leaderboard")
     return res.status(200).json({ scores: scores });
   } catch (err) {
     console.log(err);
