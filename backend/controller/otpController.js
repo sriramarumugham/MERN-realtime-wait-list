@@ -5,6 +5,7 @@ const { emailConfig } = require("../config/nodemailer");
 const OTP = require("../model/OTP");
 const User = require("../model/User");
 
+//create random nubmer store it in mongo db in TTL time to live documents
 const createOtp = async (req, res, next) => {
   try {
     const randomNumber = Math.floor(1000 + Math.random() * 9000);
@@ -12,7 +13,7 @@ const createOtp = async (req, res, next) => {
       email: req.user.email,
       otp: randomNumber,
     });
-    console.log("createdOTP" , createdOTP.otp);
+    console.log("createdOTP", createdOTP.otp);
     req.otp = createdOTP.otp;
     next();
   } catch (error) {
@@ -21,6 +22,7 @@ const createOtp = async (req, res, next) => {
 };
 
 const sendEMail = (req, res) => {
+  //send eamil via nodemailer
   const transporter = nodemailer.createTransport(emailConfig);
 
   const mailOptions = {
@@ -61,6 +63,7 @@ const sendEMail = (req, res) => {
     });
 };
 
+//check the enter otp by the user
 const verifyOtp = async (req, res) => {
   try {
     const { email } = req.user;
@@ -71,7 +74,7 @@ const verifyOtp = async (req, res) => {
 
     for (let userOTP of usersOTPs) {
       if (userOTP.otp == otp) {
-        console.log("user enterd OTP");
+        console.log("OTP verified updating the user to verified user");
         await User.findOneAndUpdate(
           { email: userOTP.email },
           { verified: true }
@@ -84,24 +87,6 @@ const verifyOtp = async (req, res) => {
     console.log(error);
     return res.status(404).json({ error: error });
   }
-
-  // .then((users) => {
-  //   users.map((user) => {
-  //     if (user.otp == otp) {
-  //       let updatedUser = User.findOneAndUpdate(
-  //         { email: user.email },
-  //         { verified: true },
-  //         { returnDocument: true }
-  //       );
-  //       return res
-  //         .status(200)
-  //         .json({ message: "otp verified", user: { updatedUser } });
-  //     }
-  //   });
-  // })
-  // .catch((error) => {
-  //   return res.status(501).json({ error: error  });
-  // });
 };
 
 module.exports = { sendEMail, createOtp, verifyOtp };

@@ -7,7 +7,7 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const socketio = require("socket.io");
 const PORT = process.env.PORT || 8000;
-const Room=require('./model/Room');
+const Room = require("./model/Room");
 db();
 
 const app = express();
@@ -48,14 +48,13 @@ io.on("connection", (socket) => {
   console.log(`Socket ${socket.id} connected`);
 
   socket.on("update-leaderboard", async (leaderboard) => {
-    try{
+    try {
       let scores = await Room.find().populate("user").sort({ score: 1 });
-    console.log(scores);
+      console.log(scores);
       io.emit("updated-leaderboard", scores);
-    }
-    catch(error){
+    } catch (error) {
       console.log("scoket couldnt get scores", error);
-    }  
+    }
   });
   socket.on("disconnect", (socket) => {
     console.log(`socket ${socket.id} disconnected`);

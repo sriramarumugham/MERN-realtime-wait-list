@@ -29,11 +29,11 @@ const Score = ({ socket }) => {
     axios
       .get("http://localhost:8000/user/room/get", config)
       .then((res) => {
-        console.log("got scores");
+        console.log("got leaderboard");
         setScore(res.data.scores);
       })
       .catch((err) => {
-        console.log(err);
+        console.log("error" , err);
       });
   };
 
