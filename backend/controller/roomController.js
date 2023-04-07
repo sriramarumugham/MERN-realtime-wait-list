@@ -30,7 +30,7 @@ const joinRoom = async (req, res) => {
 
         if (updatedReferredUser.score <= 1) {
           let updatedUser = await User.findOneAndUpdate(
-            { email: user.email },
+            { _id: updatedReferredUser.user },
             { winner: true },
             { new: true }
           );
