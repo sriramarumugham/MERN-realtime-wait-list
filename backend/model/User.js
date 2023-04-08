@@ -27,6 +27,10 @@ const UserSchema = new mongoose.Schema(
     winner: {
       type: Boolean,
       default: false,
+    },
+    referralCode:{
+      type:String, 
+      default: ""
     }
   },
   { timestamps: true }

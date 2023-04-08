@@ -6,19 +6,24 @@ const mongoose = require("mongoose");
 
 const RoomSchema = new mongoose.Schema(
   {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      require: true,
+    name: {
+      type:String, 
+      default: "LeaderBoard"
     },
-    score: {
-      type: Number,
-      default: 100,
-    },
-    referralCode: {
-      type: String,
-      unique: true,
-    },
+    
+    users: [
+      {
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+          require: true,
+        },
+        score: {
+          type: Number,
+          default: 100,
+        }
+      }
+    ]
   },
   { timestamps: true }
 );
