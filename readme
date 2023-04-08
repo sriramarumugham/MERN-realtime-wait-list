@@ -190,3 +190,32 @@ OTP Schema
 
 ## User schema
 
+{
+  "_id": {
+    "$oid": "64319808e50d89b193a9dd95"
+  },
+  "name": "sriram",
+  "email": "sriramlibra0@gmail.com",
+  "password": "pass",
+  "verified": true,
+  "joinedRoom": true,
+  "winner": false,
+  "referralCode": "FP97V3",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1680971784568"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1680971915762"
+    }
+  },
+  "__v": {
+    "$numberInt": "0"
+  }
+}
+
+## schema diagram
+
+![Screenshot](screenshot.jpeg)
