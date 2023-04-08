@@ -82,3 +82,111 @@ REACT_APP_BASE_URL=http://localhost:8000 or your backend end hosted url
 used render for backend https://realtime-waitlist.onrender.com
 
 used Vercel for frontend https://mern-realtime-wait-list.vercel.app/
+
+
+
+
+OTP Schema
+
+ [ {
+    "_id": {
+      "$oid": "64319b9be50d89b193a9de10"
+    },
+    "email": "001crazymakers@gmail.com",
+    "otp": {
+      "$numberInt": "6693"
+    },
+    "expireAt": {
+      "$date": {
+        "$numberLong": "1680971135538"
+      }
+    },
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1680972699620"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1680972699620"
+      }
+    },
+    "__v": {
+      "$numberInt": "0"
+    }
+  }
+]
+
+
+
+## Room schema
+
+{
+  "_id": {
+    "$oid": "6431988be50d89b193a9dda8"
+  },
+  "name": "LeaderBoard",
+  "users": [
+    {
+      "user": {
+        "$oid": "64319808e50d89b193a9dd95"
+      },
+      "position": {
+        "$numberInt": "70"
+      },
+      "_id": {
+        "$oid": "6431988ce50d89b193a9ddaa"
+      }
+    },
+    {
+      "user": {
+        "$oid": "6431983be50d89b193a9dd9a"
+      },
+      "position": {
+        "$numberInt": "100"
+      },
+      "_id": {
+        "$oid": "643198e5e50d89b193a9ddc5"
+      }
+    },
+    {
+      "user": {
+        "$oid": "6431992ae50d89b193a9ddd5"
+      },
+      "position": {
+        "$numberInt": "100"
+      },
+      "_id": {
+        "$oid": "64319972e50d89b193a9ddec"
+      }
+    },
+    {
+      "user": {
+        "$oid": "64319b68e50d89b193a9de06"
+      },
+      "position": {
+        "$numberInt": "100"
+      },
+      "_id": {
+        "$oid": "64319befe50d89b193a9de2c"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1680971915901"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1680972783278"
+    }
+  },
+  "__v": {
+    "$numberInt": "0"
+  }
+}
+
+
+## User schema
+
