@@ -11,8 +11,11 @@ const Score = ({ socket }) => {
 
   useEffect(() => {
     //societ io things her get the live data based on something and update the state
-    socket.on("updated-leaderboard", (scores) => {
-      setScore(scores);
+    socket.on("updated-leaderboard", (leaderboard) => {
+      console.log(leaderboard);
+      let position=leaderboard.users;
+      setScore(position);
+      console.log(score);
     });
     getScore();
   }, []);
@@ -25,15 +28,14 @@ const Score = ({ socket }) => {
         withCredentials: true,
       },
     };
-    
+
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/user/room/get`, config)
       .then((res) => {
-        console.log("got leaderboard");
-        setScore(res.data.scores);
+        setScore(res.data.scores.users);
       })
       .catch((err) => {
-        console.log("error" , err);
+        console.log("error", err.message);
       });
   };
 
@@ -70,7 +72,7 @@ const Score = ({ socket }) => {
                 >
                   <span className="font-bold">
                     {" "}
-                    #{item.score <= 0 ? 1 : item.score}{" "}
+                    #{item.position <= 0 ? 1 : item.position}{" "}
                   </span>
                   <span className="font-bold">
                     {" "}
@@ -93,11 +95,13 @@ const Score = ({ socket }) => {
                     key={item._id}
                     className="text-lg font-bold text-orange-200 "
                     onClick={() => {
-                      copy(item.referralCode);
+                      copy(item.user.referralCode);
                     }}
                   >
                     Your code{" "}
-                    <span className="font-extrabold">{item.referralCode}</span>
+                    <span className="font-extrabold">
+                      {item.user.referralCode}
+                    </span>
                     <span>
                       <i class="fa-regular fa-clipboard mx-3"></i>
                     </span>

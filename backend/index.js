@@ -65,8 +65,13 @@ io.on("connection", (socket) => {
   socket.on("update-leaderboard", async (leaderboard) => {
     try {
       //get teh updated scores
-      let scores = await Room.find().populate("user").sort({ score: 1 });
-      console.log(scores);
+
+      let scores = await Room.findOne({ name: "LeaderBoard" }).populate({
+        path: "users",populate: {path:"user" ,model: "User"}
+      });
+  
+
+      console.log("scores.users sending scores" , "hey hello trying to update the score");
       //sendt it to the user
       io.emit("updated-leaderboard", scores);
     } catch (error) {

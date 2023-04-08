@@ -10,7 +10,6 @@ const Referral = ({socket}) => {
   const navigate = useNavigate();
   const { token, setUser, user } = UserState();
 
-  console.log(user);
 
   useEffect(() => {
     window.addEventListener("beforeunload", handleBeforeUnload);
