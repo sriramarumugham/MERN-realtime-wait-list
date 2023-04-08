@@ -1,0 +1,84 @@
+
+
+## about the app
+
+    1. The app allows a potential customer to sign up to the waiting list
+    with his email address. (he will see a screen with an email address)
+
+    2. As soon as he signs up, his position in the waiting list will be
+    displayed. (The first customer gets the default number of 99. When
+    the next customer signs up, his waiting list position is 100)
+
+    3. Once he signed up for the waiting list, he will get a unique referral link
+
+    4. He can share this link to his friends.
+
+    5. If their friends sign up using his referral link, he will “move up” by 1
+    place in his position (Example: John has joined the wait list at position:
+
+    6. He referred 10 of his friends. When they joined, John’s position
+    will go to 110)
+
+    7. Once a customer reaches Position 1, he will receive an email with a
+    coupon code to purchase the new product.
+
+## Implementing the app
+
+    1. Registration with email
+
+    2. Creating session with JWT on Login 
+
+    3. OTP email verificatoin, 
+
+    4. Joint the queu for iphone with or withour a referral 
+
+    5. Realtime queu update with sockiet io for all the users 
+    when a new users enter the room 
+
+    6. Nodemailer email notification when user reached #1 position in the queue
+
+
+## instalation
+
+# Backend
+
+npm
+to install node modules: npm install  
+to start the backend use: npm run start || nodemon index.js || node index.js
+
+environment variable requirements:
+
+# HTTP port
+
+HTTP_PORT=any prot number example 8000
+
+# connection with monogo db atlas
+
+MONGO_URL=mongodb+srv://<username>:<password>@cluster0.to9bzot.mongodb.net/?retryWrites=true&w=majority
+
+# JWT
+
+JWT_SECTET= secret
+
+# nodemailer create a app password for your backend
+
+EMAIL=development.youremail@gmail.com
+PASSWORD= google app password
+
+link: https://support.google.com/accounts/answer/185833?hl=en
+
+## Frontend
+
+npm
+to install node modules: npm install
+to start the react app: npm run start
+
+## env requirements for front end
+
+REACT_APP_BASE_URL=http://localhost:8000 or your backend end hosted url
+
+## Deployment
+
+used render for backend https://realtime-waitlist.onrender.com
+
+used Vercel for frontend https://mern-realtime-wait-list.vercel.app/
